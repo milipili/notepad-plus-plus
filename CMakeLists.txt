@@ -20,3 +20,4 @@ add_compile_options(
 
 include("cmake/source-group.cmake")
 include("cmake/boost.cmake")
+include("cmake/scintilla.cmake")
