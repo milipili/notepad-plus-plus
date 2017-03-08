@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 3.7)
+
+set(CMAKE_CONFIGURATION_TYPES Debug Release CACHE TYPE INTERNAL FORCE)
+
 project(notepad++ VERSION 1.2.3)
 
 set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
