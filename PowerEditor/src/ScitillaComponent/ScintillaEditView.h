@@ -130,7 +130,6 @@ const int MARK_HIDELINESUNDERLINE = 21;
 
 
 int getNbDigits(int aNum, int base);
-HMODULE loadSciLexerDll();
 
 TCHAR * int2str(TCHAR *str, int strLen, int number, int base, int nbChiffre, bool isZeroLeading);
 
@@ -198,10 +197,8 @@ public:
 	{
 		--_refCount;
 
-		if ((!_refCount)&&(_hLib))
+		if ((!_refCount))
 		{
-			::FreeLibrary(_hLib);
-
 			for (BufferStyleMap::iterator it(_hotspotStyles.begin()); it != _hotspotStyles.end(); ++it )
 			{
 				for (StyleMap::iterator it2(it->second->begin()) ; it2 != it->second->end() ; ++it2)
@@ -645,7 +642,6 @@ public:
 	bool isTextDirectionRTL() const;
 
 protected:
-	static HINSTANCE _hLib;
 	static int _refCount;
 
     static UserDefineDialog _userDefineDlg;

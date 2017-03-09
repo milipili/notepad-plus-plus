@@ -37,16 +37,6 @@ using namespace std;
 
 // initialize the static variable
 
-// get full ScinLexer.dll path to avoid hijack
-TCHAR * getSciLexerFullPathName(TCHAR * moduleFileName, size_t len)
-{
-	::GetModuleFileName(NULL, moduleFileName, static_cast<int32_t>(len));
-	::PathRemoveFileSpec(moduleFileName);
-	::PathAppend(moduleFileName, TEXT("SciLexer.dll"));
-	return moduleFileName;
-};
-
-HINSTANCE ScintillaEditView::_hLib = loadSciLexerDll();
 int ScintillaEditView::_refCount = 0;
 UserDefineDialog ScintillaEditView::_userDefineDlg;
 
@@ -174,23 +164,8 @@ int getNbDigits(int aNum, int base)
 	return nbChiffre;
 }
 
-TCHAR moduleFileName[1024];
-HMODULE loadSciLexerDll()
-{
-	generic_string sciLexerPath = getSciLexerFullPathName(moduleFileName, 1024);
-
-	if (not isCertificateValidated(sciLexerPath, TEXT("Notepad++")))
-		return nullptr;
-	return ::LoadLibrary(sciLexerPath.c_str());
-}
-
 void ScintillaEditView::init(HINSTANCE hInst, HWND hPere)
 {
-	if (!_hLib)
-	{
-		throw std::runtime_error("ScintillaEditView::init : SCINTILLA ERROR - Can not load the dynamic library");
-	}
-
 	Window::init(hInst, hPere);
    _hSelf = ::CreateWindowEx(
 					WS_EX_CLIENTEDGE,\
