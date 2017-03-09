@@ -1,0 +1,7 @@
+function(assign_source_group)
+	foreach(source ${ARGN})
+		get_filename_component(source_path "${source}" PATH)
+		string(REPLACE "/" "\\" source_path_msvc "${source_path}")
+		source_group("${source_path_msvc}" FILES "${source}")
+	endforeach()
+endfunction()
