@@ -161,7 +161,7 @@ void parseCommandLine(TCHAR * commandLine, ParamVector & paramVector) {
 	//the commandline generic_string is now a list of zero terminated strings concatenated, and the vector contains all the substrings
 }
 
-bool isInList(const TCHAR *token2Find, ParamVector & params)
+bool removeIfExists(const TCHAR *token2Find, ParamVector & params)
 {
 	size_t nrItems = params.size();
 
@@ -328,19 +328,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int)
 		TheFirstOne = false;
 
 	bool isParamePresent;
-	bool showHelp = isInList(FLAG_HELP, params);
-	bool isMultiInst = isInList(FLAG_MULTI_INSTANCE, params);
+	bool showHelp = removeIfExists(FLAG_HELP, params);
+	bool isMultiInst = removeIfExists(FLAG_MULTI_INSTANCE, params);
 
 	CmdLineParams cmdLineParams;
-	cmdLineParams._isNoTab = isInList(FLAG_NOTABBAR, params);
-	cmdLineParams._isNoPlugin = isInList(FLAG_NO_PLUGIN, params);
-	cmdLineParams._isReadOnly = isInList(FLAG_READONLY, params);
-	cmdLineParams._isNoSession = isInList(FLAG_NOSESSION, params);
-	cmdLineParams._isPreLaunch = isInList(FLAG_SYSTRAY, params);
-	cmdLineParams._alwaysOnTop = isInList(FLAG_ALWAYS_ON_TOP, params);
-	cmdLineParams._showLoadingTime = isInList(FLAG_LOADINGTIME, params);
-	cmdLineParams._isSessionFile = isInList(FLAG_OPENSESSIONFILE, params);
-	cmdLineParams._isRecursive = isInList(FLAG_RECURSIVE, params);
+	cmdLineParams._isNoTab = removeIfExists(FLAG_NOTABBAR, params);
+	cmdLineParams._isNoPlugin = removeIfExists(FLAG_NO_PLUGIN, params);
+	cmdLineParams._isReadOnly = removeIfExists(FLAG_READONLY, params);
+	cmdLineParams._isNoSession = removeIfExists(FLAG_NOSESSION, params);
+	cmdLineParams._isPreLaunch = removeIfExists(FLAG_SYSTRAY, params);
+	cmdLineParams._alwaysOnTop = removeIfExists(FLAG_ALWAYS_ON_TOP, params);
+	cmdLineParams._showLoadingTime = removeIfExists(FLAG_LOADINGTIME, params);
+	cmdLineParams._isSessionFile = removeIfExists(FLAG_OPENSESSIONFILE, params);
+	cmdLineParams._isRecursive = removeIfExists(FLAG_RECURSIVE, params);
 	cmdLineParams._langType = getLangTypeFromParam(params);
 	cmdLineParams._localizationPath = getLocalizationPathFromParam(params);
 	cmdLineParams._line2go = getNumberFromParam('n', params, isParamePresent);
