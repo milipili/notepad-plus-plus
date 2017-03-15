@@ -13,4 +13,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
 
+add_compile_options(
+	"/MP"
+	"/EHa"
+)
+
 include("cmake/source-group.cmake")
